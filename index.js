@@ -1,31 +1,14 @@
-const puppeteer = require('puppeteer');
+const axios = require('axios');
+const cheerio = require('cheerio');
 
-(async () => {
-    const browser = await puppeteer.launch({ 
-        headless: false, 
-    });
-    const page = await browser.newPage();
-    await page.goto("https://foxbusiness.com/markets");
-    await page.waitForSelector("body")
-    const articles = await page.evaluate(() => {
-        const links = document.querySelectorAll(".title");
-        const dateEle = document.querySelectorAll(".meta > .time");
+axios.get('https://foxbusiness.com/markets')
+  .then(response => {
+    const $ = cheerio.load("<h1>hello</h1>");
 
-        const times = Array.from(dateEle).map(t => t.textContent)
+    const links = $("h1");
 
-        const articles = Array.from(links).map((v, i) => (
-            {
-                url: v.childNodes["0"].href,
-                time: times[i]
-            }
-        ))
-
-        return articles;
-    })
-
-    await browser.close();
-
-    
-
-    await require('./scrapeArticle')(articles[0].url)
-})();
+    console.log(links.text())
+  })
+  .catch(e => {
+    console.log(e);
+  })
