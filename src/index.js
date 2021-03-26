@@ -1,5 +1,6 @@
 const axios = require("axios")
 const cheerio = require("cheerio")
+const scrape = require("./scrapeArticle");
 
 async function fetchHTML(url) {
   const { data } = await axios.get(url)
@@ -12,10 +13,14 @@ async function fetchHTML(url) {
     $('.info-header').each((i, e) => {
         const time = $(e).find(".meta > .time").text();
         const link = $(e).find(".title > a").attr("href");
-        list.push({
-            url: link,
-            time
-        });
+        if (!link.startsWith("https://")) {
+            list.push({
+                url: link,
+                time
+            });
+        }   
     })
-    console.log(list)
+    list.map(l => {
+        scrape(l.url)
+    })
 })()
