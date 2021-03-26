@@ -6,20 +6,16 @@ module.exports = async (url) => {
     });
     const page = await browser.newPage();
     await page.goto(url);
-    await page.waitForSelector("p")
+    await page.waitForSelector("body")
     const text = await page.evaluate(() => {
-        const paragraphs = document.getElementsByTagName("p");
-
-        return "paragraphs";
+        const paragraphs = document.querySelector(".article-body");
+        const parser = new DOMParser();
+        const htmlDoc = parser.parseFromString(paragraphs.innerHTML, 'text/html');
+        let text = "";
         
-        // const textArr = Array.from(paragraphs).map(p => p.textContent)
+        Array.from(htmlDoc.getElementsByTagName("p")).map(p => text += p.textContent)
 
-        // let text = "";
-        // textArr.map(t => {
-        //     text += t
-        // })
-
-        // return text;
+        return text;
     })
-    console.log(text)
+    return text;
 }

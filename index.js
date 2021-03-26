@@ -25,5 +25,7 @@ const puppeteer = require('puppeteer');
 
     await browser.close();
 
+    
+
     await require('./scrapeArticle')(articles[0].url)
 })();
