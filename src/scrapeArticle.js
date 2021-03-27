@@ -1,12 +1,6 @@
-const axios = require("axios")
-const cheerio = require("cheerio")
+const fetchHTML = require("./fetchHTML");
 
 module.exports = async (url) => {
-    async function fetchHTML(url) {
-        const { data } = await axios.get(url)
-        return cheerio.load(data)
-    }
-
     const $ = await fetchHTML(`https://foxbusiness.com${url}`);
     let content = "";
 

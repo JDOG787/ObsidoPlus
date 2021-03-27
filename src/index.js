@@ -1,11 +1,5 @@
-const axios = require("axios")
-const cheerio = require("cheerio")
 const scrape = require("./scrapeArticle");
-
-async function fetchHTML(url) {
-  const { data } = await axios.get(url)
-  return cheerio.load(data)
-}
+const fetchHTML = require("./fetchHTML");
 
 (async () => {
     const $ = await fetchHTML("https://foxbusiness.com/markets");
@@ -20,7 +14,7 @@ async function fetchHTML(url) {
             });
         }   
     })
-    list.map(l => {
-        scrape(l.url)
+    list.map(async l => {
+        console.log(await scrape(l.url))
     })
 })()
