@@ -1,5 +1,6 @@
 const scrape = require("./scrapeArticle");
 const fetchHTML = require("./fetchHTML");
+const analyze = require("./textAnalysis");
 
 (async () => {
     const $ = await fetchHTML("https://foxbusiness.com/markets");
@@ -15,6 +16,7 @@ const fetchHTML = require("./fetchHTML");
         }   
     })
     list.map(async l => {
-        console.log(await scrape(l.url))
+        const text = await scrape(l.url)
+        console.log(`Article from: ${l.time}: ${analyze(text, l.time)}`)
     })
 })()

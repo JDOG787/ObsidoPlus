@@ -1,3 +1,13 @@
-[
-    
-]
+{
+    "tickers": [
+        "BTC-USD",
+        "ETH-USD",
+        "DOGE-USD"
+    ],
+
+    "companies": [
+        "Bitcoin USD",
+        "Ethereum USD",
+        "Dogecoin USD"
+    ]
+}

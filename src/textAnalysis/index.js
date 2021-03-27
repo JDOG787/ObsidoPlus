@@ -9,3 +9,14 @@ const stocks = require("./stocks.json");
 // 5. determine which stock might be influenced
 // 6. [later] improve algo
 // ===================================
+
+module.exports = (text, t) => {
+    let isRelevant = false;
+    keywords.map(k => {
+        if (text.includes(k)) {
+            isRelevant = true;
+        }
+    })
+
+    return isRelevant;
+}
