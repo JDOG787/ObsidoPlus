@@ -15,13 +15,13 @@ module.exports = (text, t) => {
     let score = 0;
     keywords.map(k => {
         if (text.includes(k)) {
-            score += 5;
+            score !== 10 ? score += 1 : score = 10
         }
     })
 
-    if (score >= 20) isRelevant = true;
+    if (score >= 5) isRelevant = true;
     return {
         isRelevant,
-        score
+        score: `${score}/10`
     }
 }
