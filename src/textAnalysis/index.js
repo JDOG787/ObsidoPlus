@@ -12,11 +12,16 @@ const stocks = require("./stocks.json");
 
 module.exports = (text, t) => {
     let isRelevant = false;
+    let score = 0;
     keywords.map(k => {
         if (text.includes(k)) {
-            isRelevant = true;
+            score += 5;
         }
     })
 
-    return isRelevant;
+    if (score >= 20) isRelevant = true;
+    return {
+        isRelevant,
+        score
+    }
 }

@@ -2,12 +2,14 @@
     "tickers": [
         "BTC-USD",
         "ETH-USD",
-        "DOGE-USD"
+        "DOGE-USD",
+        "RBLX"
     ],
 
     "companies": [
         "Bitcoin USD",
         "Ethereum USD",
-        "Dogecoin USD"
+        "Dogecoin USD",
+        "Roblox"
     ]
 }
