@@ -18,11 +18,12 @@ async function checkNewArticles() {
     });
     list.map(async l => {
         const text = await scrape(l.url);
-        console.log(`Article from: ${l.url}: ${analyze(text, l.time).score}`);
+        analyze(text)
+        console.log(`Article from: ${l.url}: ${analyze(text)}`);
     });
 }
 
 // run checkNewArticles every few minutes
-const job = schedule.scheduleJob("*/5 * * * *", () => {
+// const job = schedule.scheduleJob("*/5 * * * *", () => {
     checkNewArticles();
-});
+// });

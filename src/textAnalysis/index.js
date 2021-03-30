@@ -10,18 +10,29 @@ const stocks = require("./stocks.json");
 // 6. [later] improve algo
 // ===================================
 
-module.exports = (text, t) => {
+// module.exports = (text, t) => {
+//     let isRelevant = false;
+//     let score = 0;
+//     keywords.map(k => {
+//         if (text.includes(k)) {
+//             score !== 10 ? score += 1 : score = 10
+//         }
+//     })
+
+//     if (score >= 5) isRelevant = true;
+//     return {
+//         isRelevant,
+//         score: `${score}/10`
+//     }
+// }
+
+module.exports = (text) => {
     let isRelevant = false;
-    let score = 0;
-    keywords.map(k => {
-        if (text.includes(k)) {
-            score !== 10 ? score += 1 : score = 10
+    const textArray = text.replace("/,/g").replace("/./g").toLowerCase().split(" ");
+    keywords.forEach(w => {
+        if (textArray.indexOf(w) !== -1) {
+            isRelevant = true;
         }
     })
-
-    if (score >= 5) isRelevant = true;
-    return {
-        isRelevant,
-        score: `${score}/10`
-    }
+    return isRelevant;
 }
